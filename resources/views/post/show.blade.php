@@ -29,6 +29,7 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Name</th>
+                                            <th>Category-Name</th>
                                             <th>Slug</th>
                                             <th>Description</th>
                                             <th>Content</th>
@@ -41,6 +42,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $post->name }}</td>
+                                                <td>{{ $post->category->name }}</td>
                                                 <td>{{ $post->slug }}</td>
                                                 <td>{{ $post->description }}</td>
                                                 <td>{{ $post->content }}</td>
