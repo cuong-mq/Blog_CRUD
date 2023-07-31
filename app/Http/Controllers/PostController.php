@@ -9,41 +9,45 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function show()
+
+    public function index(Request $request)
     {
         $categories = Category::all();
-
-        return view('post.show', ['categories' => $categories]);
+        $category_id = $request->input('category_id');
+        $query = Post::query();
+        if ($category_id) {
+            $query->where('category_id', $category_id);
+            $posts = $query->get();
+        } else {
+            $posts = Post::all();
+        };
+        return view('post.show', compact('posts', 'categories'));
     }
 
-    public function index()
+    public function create()
     {
-        $categoryId = request()->query('category_id');
-        $posts = Post::where('category_id', $categoryId)->get();
-        return view('post.list', ['posts' => $posts, 'categoryId' => $categoryId]);
+        $categories = Category::all();
+        return view('post.add', ['categories' => $categories,]);
     }
 
-    public function create(Request $request, $categoryId)
-    {
-        return view('post.add', ['categoryId' => $categoryId]);
-    }
-
-    public function store(Request $request, $categoryId)
+    public function store(Request $request)
     {
         $post = new Post();
         $post->name = $request->name;
-        $post->category_id = $request->categoryId;
+        $post->category_id = $request->category_id;
         $post->slug = $request->slug;
         $post->description = $request->description;
         $post->content = $request->content;
         $post->save();
-        return redirect()->route('post.index', ['category_id' => $categoryId]);
+        $categoryId = $request->category_id;
+        return redirect()->route('post.index', ['category_id' => $categoryId,]);
     }
 
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::find($id);
-        return view('post.edit', ['post' => $post]);
+        return view('post.edit', ['post' => $post, 'categories' => $categories,]);
     }
 
     public function update(Request $request, $id)
@@ -55,14 +59,13 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->content = $request->content;
         $post->save();
-        $categoryId = $request->category_id;
-        return redirect()->route('post.index', ['category_id' => $categoryId]);
+
+        return redirect()->route('post.index',);
     }
 
     public function delete(Request $request, $id)
     {
         $post = Post::find($id);
-        $categoryId = $request->category_id;
         $post->delete();
         return redirect()->back();
     }

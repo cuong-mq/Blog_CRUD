@@ -5,7 +5,6 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-
                         <div class="col-12 col-md-12 mt-2">
                             <div class="card">
                                 <div class="card-header">
@@ -33,18 +32,14 @@
                                                         <td>{{ $category->slug }}</td>
                                                         <td>{{ $category->description }}</td>
                                                         <td>{{ $category->content }}</td>
-                                                        <td> <a href="{{ route('category.edit', $category->id) }}"
-                                                                class="btn btn-primary btn-sm">Edit</a>
+                                                        <td> <a href="{{ route('category.edit', $category->id) }}"    class="btn btn-primary btn-sm">Edit</a>
                                                             <form method="post"
                                                                 action="{{ route('category.delete', $category->id) }}">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                             </form>
                                                         </td>
-
-
                                                     </tr>
                                                 @endforeach
                                             </tbody>

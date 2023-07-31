@@ -19,9 +19,14 @@
                                     value="{{ $post->name }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Category_id</label>
-                                <input type="text" name="category_id" class="form-control" required
-                                    value="{{ $post->category_id }}">
+                                <label class="form-label">Category</label>
+                                <select class="itemName form-control select2" id="category_id" name="category_id"  autocomplete="off" validate="true" validate-pattern="required" label="category">
+                                    <option value="">Select</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="error_category"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Slug</label>

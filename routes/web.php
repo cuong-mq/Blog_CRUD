@@ -24,10 +24,9 @@ Route::get('category/{id}/edit', [CategoryController::class, 'edit'])->name('cat
 Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
-Route::get('/post', [PostController::class, 'show'])->name('post.show');
 Route::get('/post/list', [PostController::class, 'index'])->name('post.index');
-Route::get('/post/create/{categoryId}', [PostController::class, 'create'])->name('post.create');
-Route::post('/post/store/{categoryId}', [PostController::class, 'store'])->name('post.store');
+Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
 Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
 Route::put('/post/update/{id}', [PostController::class, 'update'])->name('post.update');
 Route::delete('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
