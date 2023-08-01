@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Service\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    protected $categoryService;
+    
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     public function index()
     {
-        $categories =  DB::table('categories')->get();
+        $categories = $this->categoryService->getCategory();
         return view('category.list', ['categories' => $categories]);
     }
 
@@ -21,37 +29,25 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->slug = $request->slug;
-        $category->description = $request->description;
-        $category->content = $request->content;
-        $category->save();
+        $category = $this->categoryService->storeCategory($request);
         return redirect()->route('category.index');
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryService->getCategoryById($id);
         return view('category.edit', ['category' => $category]);
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->slug = $request->slug;
-        $category->description = $request->description;
-        $category->content = $request->content;
-        $category->save();
+        $category = $this->categoryService->updateCategory($request, $id);
         return redirect()->route('category.index');
     }
 
     public function delete(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->posts()->delete();
-        $category->delete();
+        $category = $this->categoryService->deleteCategory($request, $id);
         return redirect()->back();
     }
 }
