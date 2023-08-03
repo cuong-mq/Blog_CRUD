@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class PostController extends Controller
         return view('post.add', ['categories' => $categories,]);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $post = $this->postService->store($request);
         $categoryId = $request->category_id;
@@ -43,7 +44,7 @@ class PostController extends Controller
         return view('post.edit', ['post' => $post, 'categories' => $categories,]);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $post = $this->postService->updatePost($request, $id);
         return redirect()->route('post.index',);

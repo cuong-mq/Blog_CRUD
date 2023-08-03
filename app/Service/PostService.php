@@ -4,8 +4,10 @@ namespace App\Service;
 
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use function PHPUnit\Framework\returnSelf;
 
 class PostService
@@ -32,7 +34,7 @@ class PostService
     {
         return Category::all();
     }
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $post = new Post();
         $post->name = $request->name;
@@ -46,6 +48,7 @@ class PostService
 
     public function updatePost(Request $request, $id)
     {
+
         $post = Post::find($id);
         $post->name = $request->name;
         $post->category_id = $request->category_id;

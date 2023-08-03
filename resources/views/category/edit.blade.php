@@ -22,6 +22,7 @@
                                 <label class="form-label">Slug</label>
                                 <input type="text" name="slug" class="form-control" required
                                     value="{{ $category->slug }}">
+                                <div class="btn-danger d-inline-block">{{ $errors->first('slug') }}</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
