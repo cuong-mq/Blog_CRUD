@@ -27,7 +27,7 @@ class PostService
         if ($category_id) {
             $query->where('category_id', $category_id);
         }
-        return $query->get();
+        return $query->paginate(5);
     }
 
     public function getCategory()

@@ -20,7 +20,7 @@ class PostController extends Controller
     {
         $categories = $this->postService->getCategory();
         $category_id = $request->input('category_id');
-        $posts = $this->postService->getPost();
+        $posts = $this->postService->getPost($category_id);
         return view('post.show', compact('posts', 'categories'));
     }
 

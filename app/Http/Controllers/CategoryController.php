@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = $this->categoryService->getCategory();
+        $categories = $this->categoryService->getCategory(5);
         return view('category.list', ['categories' => $categories]);
     }
 

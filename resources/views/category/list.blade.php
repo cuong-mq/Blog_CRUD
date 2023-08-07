@@ -28,7 +28,7 @@
                                             <tbody>
                                                 @foreach ($categories as $key => $category)
                                                     <tr>
-                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $categories->firstItem() + $key }}</td>
                                                         <td>{{ $category->name }}</td>
                                                         <td>{{ $category->slug }}</td>
                                                         <td>{{ $category->description }}</td>
@@ -49,6 +49,9 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        <div class="d-flex justify-content-end mt-3">
+                                            {{ $categories->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

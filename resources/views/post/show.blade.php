@@ -40,7 +40,7 @@
                                     <tbody>
                                         @foreach ($posts as $key => $post)
                                             <tr>
-                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $posts->firstItem() + $key }}</td>
                                                 <td>{{ $post->name }}</td>
                                                 <td>{{ $post->category->name }}</td>
                                                 <td>{{ $post->slug }}</td>
@@ -62,6 +62,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-end mt-3">
+                                    {{ $posts->appends(['category_id' => Request::get('category_id')])->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

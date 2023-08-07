@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class CategoryService
 {
-    public function getCategory()
+    public function getCategory($amount)
     {
-        return Category::all();
+        return Category::paginate($amount);
     }
     public function storeCategory(Request $request)
     {
