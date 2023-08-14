@@ -29,11 +29,27 @@ class PostService
         }
         return $query->paginate(5);
     }
+    public function getPostByAjax($category_id = null)
+    {
+        $query = Post::with(['category']);
+        if ($category_id) {
+            $query->where('category_id', $category_id);
+        };
+        return $query->get();
+    }
+
+
 
     public function getCategory()
     {
         return Category::all();
     }
+
+    public function getPostById($id)
+    {
+        return Post::find($id);
+    }
+
     public function store(PostRequest $request)
     {
         $post = new Post();
