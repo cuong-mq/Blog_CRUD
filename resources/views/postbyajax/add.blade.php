@@ -1,4 +1,4 @@
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,8 +6,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="add-category-form" method="post">
+                <form id="add-post-form" method="post">
                     @csrf
+                    <div class=" row mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="categorySelect" name="category_id" id="categorySelectModal" class="form-control" required>
+                        </select>
+                    </div>
+
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" required>
@@ -15,9 +21,6 @@
                     <div class="mb-3">
                         <label class="form-label">Slug</label>
                         <input type="text" name="slug" class="form-control" required>
-                        <div class="global-error-messages text-danger"></div>
-                        <div id="error-message"></div>
-
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description</label>
